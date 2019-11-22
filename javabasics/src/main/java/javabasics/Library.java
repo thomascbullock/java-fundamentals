@@ -3,7 +3,7 @@
  */
 package javabasics;
 
-import java.util.Random;
+import java.util.*;
 
 
 public class Library {
@@ -79,4 +79,59 @@ public class Library {
         return arrayOfArrays[winningIndex];
     }
 
+    public String analyzeWeatherData(int[][] weatherData) {
+
+        HashSet<Integer> temperaturesSeen = new HashSet<>();
+        int maxTemp = 0;
+        int minTemp = 100000;
+
+
+        for (int[] singleArray: weatherData)
+            for (int singleTemp : singleArray) {
+                temperaturesSeen.add(singleTemp);
+                if (singleTemp < minTemp) {
+                    minTemp = singleTemp;
+                }
+                if (singleTemp > maxTemp) {
+                    maxTemp = singleTemp;
+                }
+            }
+
+        String result = "High: " + maxTemp + "\nLow: " + minTemp + "\n";
+
+        while (minTemp < maxTemp) {
+            if (!temperaturesSeen.contains(minTemp)) {
+
+                result = result + "Never saw temperature: " + minTemp + "\n";
+            }
+            minTemp++;
+        }
+
+        //trimming to remove extraneous new line
+        return result.trim();
+
+    }
+
+    public String tally(List<String> votes){
+
+        HashMap<String, Integer> voteMap = new HashMap<>();
+        HashSet<String> candidates = new HashSet<>();
+
+        String winner = "no one yet";
+        int highScore = 0;
+
+        for ( String candidate : votes) {
+            if (!candidates.contains(candidate)) {
+                voteMap.put(candidate, 0);
+                candidates.add(candidate);
+            } else {
+                voteMap.put(candidate, voteMap.get(candidate) + 1);
+                if (voteMap.get(candidate) > highScore) {
+                    winner = candidate;
+                    highScore = voteMap.get(candidate);
+                }
+            }
+        }
+        return winner;
+    }
 }
