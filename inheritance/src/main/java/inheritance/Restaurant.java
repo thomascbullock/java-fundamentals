@@ -21,13 +21,24 @@ public class Restaurant {
     private String name;
     private int stars;
 
-    Restaurant(String  name, int stars) {
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    private String price;
+
+    Restaurant(String  name, int stars, String price) {
         this.name = name;
         this.stars = stars;
+        this.price = price;
     }
 
     public String toString(){
-        return "Restaurant " + this.getName() + " has " + this.getStars() + " stars.";
+        return this.getName() + " has " + this.getStars() + " stars, and is rated " + this.getPrice() + " for price.";
     }
 
 

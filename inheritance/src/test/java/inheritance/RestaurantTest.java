@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class RestaurantTest {
     @Test public void testRestaurant() {
-        Restaurant restaurant = new Restaurant("The Knife and Cleaver", 4);
-        assertEquals("Restaurant The Knife and Cleaver has 4 stars.", restaurant.toString());
+        Restaurant restaurant = new Restaurant("The Knife and Cleaver", 4, "$$$");
+        assertEquals("The Knife and Cleaver has 4 stars, and is rated $$$ for price.", restaurant.toString());
     }
 }
