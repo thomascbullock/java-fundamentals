@@ -1,45 +1,22 @@
 package inheritance;
 
-public class Restaurant {
+public class Restaurant extends Business {
 
-    public String getName() {
-        return name;
+    public Restaurant(String name, String price) {
+        super(name, price);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStars() {
-        return stars;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
-    }
-
-    private String name;
-    private int stars;
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    private String price;
-
-    Restaurant(String  name, int stars, String price) {
-        this.name = name;
-        this.stars = stars;
-        this.price = price;
+    public Restaurant(String name, String price, String chain) {
+        super(name, price, chain);
     }
 
     public String toString(){
-        return this.getName() + " has " + this.getStars() + " stars, and is rated " + this.getPrice() + " for price.";
-    }
+        String retString = "The restaurant " + this.name + " has " + this.getStars() + " stars, and is rated " + this.price + " for price.";
+        if (this.getChain() != null) {
+            retString += " " + this.name + " is part of the " + this.chain + " chain.";
+        }
 
+        return retString;
+    }
 
 }

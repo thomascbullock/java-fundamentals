@@ -3,12 +3,38 @@
  */
 package inheritance;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.*;
 
 public class ReviewTest {
-    @Test public void testReview() {
-        Review review = new Review("Giles Coren", "Food tastes of despair.", 4);
-        assertEquals("Giles Coren says: Food tastes of despair. Rating: 4 stars.", review.toString());
+
+    @Test public void testSingleReview() {
+        Restaurant restaurant = new Restaurant ("The Knife and Cleaver", "$$$");
+        User user = new User("Giles Coren");
+        Review review = new RestaurantReview(user, "Food tastes of despair.", 4, restaurant);
+        assertEquals("Giles Coren's review of The Knife and Cleaver: Food tastes of despair. Rating: 4 stars.", review.toString());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+        public void testTooManyReviews() {
+        Restaurant restaurant = new Restaurant ("The Knife and Cleaver", "$$$");
+        User user = new User("Giles Coren");
+        Review review = new RestaurantReview(user, "Food tastes of despair.", 4, restaurant);
+        restaurant.addReview(review);
+        restaurant.addReview(review);
+    }
+
+    @Test
+    public void testUpdateStars() {
+        Restaurant restaurant = new Restaurant ("The Knife and Cleaver", "$$$");
+        User user = new User("Giles Coren");
+        Review review = new RestaurantReview(user, "Food tastes of despair.", 4, restaurant);
+        review.updateStars(5);
+        assertEquals("Giles Coren's review of The Knife and Cleaver: Food tastes of despair. Rating: 5 stars.", review.toString());
+    }
+
+
 }
